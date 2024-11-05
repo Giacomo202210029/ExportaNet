@@ -19,9 +19,9 @@ public class ProductoController {
         return ProductoService.findAll();
     }
 
-    @GetMapping
-    public List <Producto> getProductobyId(@PathVariable Long id){
-        return (List<Producto>) ProductoService.findById(id);
+    @GetMapping("/{id}")
+    public Producto getProductobyId(@PathVariable Long id){
+        return ProductoService.findById(id);
     }
 
     @PostMapping

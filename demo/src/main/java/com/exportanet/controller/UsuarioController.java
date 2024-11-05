@@ -19,9 +19,9 @@ public class UsuarioController {
         return UsuarioService.findAll();
     }
 
-    @GetMapping
-    public List <Usuario> getUsuariobyId(@PathVariable Long id){
-        return (List<Usuario>) UsuarioService.findById(id);
+    @GetMapping("/{id}")
+    public Usuario getUsuariobyId(@PathVariable Long id){
+        return  UsuarioService.findById(id);
     }
 
     @PostMapping

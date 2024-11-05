@@ -19,9 +19,9 @@ public class MensajeController {
         return MensajeService.findAll();
     }
 
-    @GetMapping
-    public List <Mensaje> getMensajebyId(@PathVariable Long id){
-        return (List<Mensaje>) MensajeService.findById(id);
+    @GetMapping("/{id}")
+    public Mensaje getMensajebyId(@PathVariable Long id){
+        return MensajeService.findById(id);
     }
 
     @PostMapping

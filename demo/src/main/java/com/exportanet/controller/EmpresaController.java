@@ -19,9 +19,9 @@ public class EmpresaController {
         return empresaService.findAll();
     }
 
-    @GetMapping
-    public List <Empresa> getEmpresabyId(@PathVariable Long id){
-        return (List<Empresa>) empresaService.findById(id);
+    @GetMapping("/{id}")
+    public Empresa getEmpresabyId(@PathVariable Long id){
+        return empresaService.findById(id);
     }
 
     @PostMapping

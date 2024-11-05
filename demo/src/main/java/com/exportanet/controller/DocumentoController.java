@@ -19,10 +19,11 @@ public class DocumentoController {
         return DocumentoService.findAll();
     }
 
-    @GetMapping
-    public List <Documento> getDocumentobyId(@PathVariable Long id){
-        return (List<Documento>) DocumentoService.findById(id);
+    @GetMapping("/{id}")
+    public Documento getDocumentobyId(@PathVariable Long id) {
+        return DocumentoService.findById(id);
     }
+
 
     @PostMapping
     public Documento createDocumento(@RequestBody Documento Documento) {

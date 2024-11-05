@@ -14,14 +14,14 @@ public class PublicacionController {
     @Autowired
     private PublicacionService PublicacionService;
 
-    @GetMapping
+    @GetMapping("/{id}")
     public List<Publicacion> getAllPublicacions() {
         return PublicacionService.findAll();
     }
 
     @GetMapping
-    public List <Publicacion> getPublicacionbyId(@PathVariable Long id){
-        return (List<Publicacion>) PublicacionService.findById(id);
+    public Publicacion getPublicacionbyId(@PathVariable Long id){
+        return  PublicacionService.findById(id);
     }
 
     @PostMapping
