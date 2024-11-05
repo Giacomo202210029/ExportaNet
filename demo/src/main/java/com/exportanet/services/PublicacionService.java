@@ -2,6 +2,7 @@
 package com.exportanet.services;
 
 import com.exportanet.model.Publicacion;
+import com.exportanet.model.Publicacion;
 import com.exportanet.repository.PublicacionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,10 @@ public class PublicacionService {
 
     public Publicacion save(Publicacion Publicacion) {
         return PublicacionRepository.save(Publicacion);
+    }
+
+    public Publicacion findById(Long id) {
+        return PublicacionRepository.findById(id).orElse(null);
     }
 
     // Métodos adicionales según tus necesidades

@@ -19,6 +19,11 @@ public class EmpresaController {
         return empresaService.findAll();
     }
 
+    @GetMapping
+    public List <Empresa> getEmpresabyId(@PathVariable Long id){
+        return (List<Empresa>) empresaService.findById(id);
+    }
+
     @PostMapping
     public Empresa createEmpresa(@RequestBody Empresa empresa) {
         return empresaService.save(empresa);

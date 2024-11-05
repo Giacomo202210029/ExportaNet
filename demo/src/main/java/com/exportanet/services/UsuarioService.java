@@ -2,6 +2,7 @@
 package com.exportanet.services;
 
 import com.exportanet.model.Usuario;
+import com.exportanet.model.Usuario;
 import com.exportanet.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,9 @@ public class UsuarioService {
 
     public Usuario save(Usuario Usuario) {
         return UsuarioRepository.save(Usuario);
+    }
+    public Usuario findById(Long id) {
+        return UsuarioRepository.findById(id).orElse(null);
     }
 
     // Métodos adicionales según tus necesidades

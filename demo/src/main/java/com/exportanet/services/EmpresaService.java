@@ -21,5 +21,9 @@ public class EmpresaService {
         return empresaRepository.save(empresa);
     }
 
+    public Empresa findById(Long id) {
+        return empresaRepository.findById(id).orElse(null);
+    }
+
     // Métodos adicionales según tus necesidades
 }

@@ -2,6 +2,7 @@
 package com.exportanet.services;
 
 import com.exportanet.model.Mensaje;
+import com.exportanet.model.Mensaje;
 import com.exportanet.repository.MensajeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,10 @@ public class MensajeService {
 
     public Mensaje save(Mensaje Mensaje) {
         return MensajeRepository.save(Mensaje);
+    }
+
+    public Mensaje findById(Long id) {
+        return MensajeRepository.findById(id).orElse(null);
     }
 
     // Métodos adicionales según tus necesidades

@@ -2,6 +2,7 @@
 package com.exportanet.services;
 
 import com.exportanet.model.Producto;
+import com.exportanet.model.Producto;
 import com.exportanet.repository.ProductoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,10 @@ public class ProductoService {
 
     public Producto save(Producto Producto) {
         return ProductoRepository.save(Producto);
+    }
+
+    public Producto findById(Long id) {
+        return ProductoRepository.findById(id).orElse(null);
     }
 
     // Métodos adicionales según tus necesidades
