@@ -1,31 +1,32 @@
-// src/main/java/com/exportanet/controller/EmpresaController.java
 package com.exportanet.controller;
 
 import com.exportanet.model.Empresa;
 import com.exportanet.services.EmpresaService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/empresas")
+@RequestMapping("/Empresas")
 public class EmpresaController {
-    @Autowired
-    private EmpresaService empresaService;
 
-    @GetMapping
+    private final EmpresaService EmpresaService;
+
+    public EmpresaController(EmpresaService EmpresaService) {
+        this.EmpresaService = EmpresaService;
+    }
+
+    @GetMapping("/all")
     public List<Empresa> getAllEmpresas() {
-        return empresaService.findAll();
+        List<Empresa> Empresas = EmpresaService.findAll();
+        Empresas.forEach(System.out::println);  // Esto imprimirá cada Empresa en la consola
+        return Empresas;
     }
 
-    @GetMapping("/{id}")
-    public Empresa getEmpresabyId(@PathVariable Long id){
-        return empresaService.findById(id);
-    }
 
-    @PostMapping
-    public Empresa createEmpresa(@RequestBody Empresa empresa) {
-        return empresaService.save(empresa);
+    @PostMapping("/add")
+    public Empresa createEmpresa(@RequestBody Empresa Empresa) {
+        return EmpresaService.addEmpresa(Empresa);
     }
 }
+

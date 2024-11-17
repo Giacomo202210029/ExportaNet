@@ -2,29 +2,29 @@
 package com.exportanet.services;
 
 import com.exportanet.model.Producto;
-import com.exportanet.model.Producto;
 import com.exportanet.repository.ProductoRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class ProductoService {
-    @Autowired
-    private ProductoRepository ProductoRepository;
+    private final ProductoRepository ProductoRepository;
+
+    public ProductoService(ProductoRepository ProductoRepository) {
+        this.ProductoRepository = ProductoRepository;
+    }
 
     public List<Producto> findAll() {
         return ProductoRepository.findAll();
     }
 
-    public Producto save(Producto Producto) {
+    @Transactional
+    public Producto addProducto (Producto Producto) {
         return ProductoRepository.save(Producto);
     }
 
-    public Producto findById(Long id) {
-        return ProductoRepository.findById(id).orElse(null);
-    }
 
-    // Métodos adicionales según tus necesidades
 }
+

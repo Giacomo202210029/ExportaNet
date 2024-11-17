@@ -3,27 +3,28 @@ package com.exportanet.services;
 
 import com.exportanet.model.Empresa;
 import com.exportanet.repository.EmpresaRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class EmpresaService {
-    @Autowired
-    private EmpresaRepository empresaRepository;
+    private final EmpresaRepository EmpresaRepository;
+
+    public EmpresaService(EmpresaRepository EmpresaRepository) {
+        this.EmpresaRepository = EmpresaRepository;
+    }
 
     public List<Empresa> findAll() {
-        return empresaRepository.findAll();
+        return EmpresaRepository.findAll();
     }
 
-    public Empresa save(Empresa empresa) {
-        return empresaRepository.save(empresa);
+    @Transactional
+    public Empresa addEmpresa (Empresa Empresa) {
+        return EmpresaRepository.save(Empresa);
     }
 
-    public Empresa findById(Long id) {
-        return empresaRepository.findById(id).orElse(null);
-    }
 
-    // Métodos adicionales según tus necesidades
 }
+

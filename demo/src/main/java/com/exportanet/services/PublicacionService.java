@@ -2,29 +2,29 @@
 package com.exportanet.services;
 
 import com.exportanet.model.Publicacion;
-import com.exportanet.model.Publicacion;
 import com.exportanet.repository.PublicacionRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class PublicacionService {
-    @Autowired
-    private PublicacionRepository PublicacionRepository;
+    private final PublicacionRepository PublicacionRepository;
+
+    public PublicacionService(PublicacionRepository PublicacionRepository) {
+        this.PublicacionRepository = PublicacionRepository;
+    }
 
     public List<Publicacion> findAll() {
         return PublicacionRepository.findAll();
     }
 
-    public Publicacion save(Publicacion Publicacion) {
+    @Transactional
+    public Publicacion addPublicacion (Publicacion Publicacion) {
         return PublicacionRepository.save(Publicacion);
     }
 
-    public Publicacion findById(Long id) {
-        return PublicacionRepository.findById(id).orElse(null);
-    }
 
-    // Métodos adicionales según tus necesidades
 }
+

@@ -5,5 +5,5 @@ import com.exportanet.model.Empresa;
 import com.exportanet.model.Mensaje;
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 
-public interface MensajeRepository extends Neo4jRepository<Mensaje, Long> {
+public interface MensajeRepository extends Neo4jRepository<Mensaje, String> {
 }

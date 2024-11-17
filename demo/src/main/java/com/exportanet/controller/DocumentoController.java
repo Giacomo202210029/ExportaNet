@@ -1,9 +1,7 @@
-// src/main/java/com/exportanet/controller/DocumentoController.java
 package com.exportanet.controller;
 
 import com.exportanet.model.Documento;
 import com.exportanet.services.DocumentoService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,22 +9,24 @@ import java.util.List;
 @RestController
 @RequestMapping("/Documentos")
 public class DocumentoController {
-    @Autowired
-    private DocumentoService DocumentoService;
 
-    @GetMapping
+    private final DocumentoService documentoService;
+
+    public DocumentoController(DocumentoService documentoService) {
+        this.documentoService = documentoService;
+    }
+
+    @GetMapping("/all")
     public List<Documento> getAllDocumentos() {
-        return DocumentoService.findAll();
-    }
-
-    @GetMapping("/{id}")
-    public Documento getDocumentobyId(@PathVariable Long id) {
-        return DocumentoService.findById(id);
+        List<Documento> documentos = documentoService.findAll();
+        documentos.forEach(System.out::println);  // Esto imprimirá cada documento en la consola
+        return documentos;
     }
 
 
-    @PostMapping
-    public Documento createDocumento(@RequestBody Documento Documento) {
-        return DocumentoService.save(Documento);
+    @PostMapping("/add")
+    public Documento createDocumento(@RequestBody Documento documento) {
+        return documentoService.addDocumento(documento);
     }
 }
+

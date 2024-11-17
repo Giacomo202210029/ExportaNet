@@ -2,29 +2,29 @@
 package com.exportanet.services;
 
 import com.exportanet.model.Documento;
-import com.exportanet.model.Empresa;
 import com.exportanet.repository.DocumentoRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class DocumentoService {
-    @Autowired
-    private DocumentoRepository DocumentoRepository;
+    private final DocumentoRepository documentoRepository;
+
+    public DocumentoService(DocumentoRepository documentoRepository) {
+        this.documentoRepository = documentoRepository;
+    }
 
     public List<Documento> findAll() {
-        return DocumentoRepository.findAll();
+        return documentoRepository.findAll();
     }
 
-    public Documento save(Documento Documento) {
-        return DocumentoRepository.save(Documento);
+    @Transactional
+    public Documento addDocumento (Documento documento) {
+        return documentoRepository.save(documento);
     }
 
-    public Documento findById(Long id) {
-        return DocumentoRepository.findById(id).orElse(null);
-    }
 
-    // Métodos adicionales según tus necesidades
 }
+

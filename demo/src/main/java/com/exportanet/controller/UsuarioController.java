@@ -1,9 +1,7 @@
-// src/main/java/com/exportanet/controller/UsuarioController.java
 package com.exportanet.controller;
 
 import com.exportanet.model.Usuario;
 import com.exportanet.services.UsuarioService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,21 +9,24 @@ import java.util.List;
 @RestController
 @RequestMapping("/Usuarios")
 public class UsuarioController {
-    @Autowired
-    private UsuarioService UsuarioService;
 
-    @GetMapping
+    private final UsuarioService UsuarioService;
+
+    public UsuarioController(UsuarioService UsuarioService) {
+        this.UsuarioService = UsuarioService;
+    }
+
+    @GetMapping("/all")
     public List<Usuario> getAllUsuarios() {
-        return UsuarioService.findAll();
+        List<Usuario> Usuarios = UsuarioService.findAll();
+        Usuarios.forEach(System.out::println);  // Esto imprimirá cada Usuario en la consola
+        return Usuarios;
     }
 
-    @GetMapping("/{id}")
-    public Usuario getUsuariobyId(@PathVariable Long id){
-        return  UsuarioService.findById(id);
-    }
 
-    @PostMapping
+    @PostMapping("/add")
     public Usuario createUsuario(@RequestBody Usuario Usuario) {
-        return UsuarioService.save(Usuario);
+        return UsuarioService.addUsuario(Usuario);
     }
 }
+

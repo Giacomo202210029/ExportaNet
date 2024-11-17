@@ -2,29 +2,29 @@
 package com.exportanet.services;
 
 import com.exportanet.model.Mensaje;
-import com.exportanet.model.Mensaje;
 import com.exportanet.repository.MensajeRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class MensajeService {
-    @Autowired
-    private MensajeRepository MensajeRepository;
+    private final MensajeRepository MensajeRepository;
+
+    public MensajeService(MensajeRepository MensajeRepository) {
+        this.MensajeRepository = MensajeRepository;
+    }
 
     public List<Mensaje> findAll() {
         return MensajeRepository.findAll();
     }
 
-    public Mensaje save(Mensaje Mensaje) {
+    @Transactional
+    public Mensaje addMensaje (Mensaje Mensaje) {
         return MensajeRepository.save(Mensaje);
     }
 
-    public Mensaje findById(Long id) {
-        return MensajeRepository.findById(id).orElse(null);
-    }
 
-    // Métodos adicionales según tus necesidades
 }
+

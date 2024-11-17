@@ -4,5 +4,5 @@ package com.exportanet.repository;
 import com.exportanet.model.Empresa;
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 
-public interface EmpresaRepository extends Neo4jRepository<Empresa, Long> {
+public interface EmpresaRepository extends Neo4jRepository<Empresa, String> {
 }

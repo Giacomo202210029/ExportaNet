@@ -1,9 +1,7 @@
-// src/main/java/com/exportanet/controller/PublicacionController.java
 package com.exportanet.controller;
 
 import com.exportanet.model.Publicacion;
 import com.exportanet.services.PublicacionService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,21 +9,24 @@ import java.util.List;
 @RestController
 @RequestMapping("/Publicacions")
 public class PublicacionController {
-    @Autowired
-    private PublicacionService PublicacionService;
 
-    @GetMapping("/{id}")
+    private final PublicacionService PublicacionService;
+
+    public PublicacionController(PublicacionService PublicacionService) {
+        this.PublicacionService = PublicacionService;
+    }
+
+    @GetMapping("/all")
     public List<Publicacion> getAllPublicacions() {
-        return PublicacionService.findAll();
+        List<Publicacion> Publicacions = PublicacionService.findAll();
+        Publicacions.forEach(System.out::println);  // Esto imprimirá cada Publicacion en la consola
+        return Publicacions;
     }
 
-    @GetMapping
-    public Publicacion getPublicacionbyId(@PathVariable Long id){
-        return  PublicacionService.findById(id);
-    }
 
-    @PostMapping
+    @PostMapping("/add")
     public Publicacion createPublicacion(@RequestBody Publicacion Publicacion) {
-        return PublicacionService.save(Publicacion);
+        return PublicacionService.addPublicacion(Publicacion);
     }
 }
+

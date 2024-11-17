@@ -1,9 +1,7 @@
-// src/main/java/com/exportanet/controller/MensajeController.java
 package com.exportanet.controller;
 
 import com.exportanet.model.Mensaje;
 import com.exportanet.services.MensajeService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,21 +9,24 @@ import java.util.List;
 @RestController
 @RequestMapping("/Mensajes")
 public class MensajeController {
-    @Autowired
-    private MensajeService MensajeService;
 
-    @GetMapping
+    private final MensajeService MensajeService;
+
+    public MensajeController(MensajeService MensajeService) {
+        this.MensajeService = MensajeService;
+    }
+
+    @GetMapping("/all")
     public List<Mensaje> getAllMensajes() {
-        return MensajeService.findAll();
+        List<Mensaje> Mensajes = MensajeService.findAll();
+        Mensajes.forEach(System.out::println);  // Esto imprimirá cada Mensaje en la consola
+        return Mensajes;
     }
 
-    @GetMapping("/{id}")
-    public Mensaje getMensajebyId(@PathVariable Long id){
-        return MensajeService.findById(id);
-    }
 
-    @PostMapping
+    @PostMapping("/add")
     public Mensaje createMensaje(@RequestBody Mensaje Mensaje) {
-        return MensajeService.save(Mensaje);
+        return MensajeService.addMensaje(Mensaje);
     }
 }
+
